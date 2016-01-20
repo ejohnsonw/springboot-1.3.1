@@ -1,0 +1,41 @@
+#set ($language="Java")
+#set ($description="creates a controller to process all api requests")
+#set ($author="Evol Johnson")
+#set ($overwrite="true")
+#set ($enabled="true")
+#set ($filep="ApiController.java")
+#set ($filename="${outputDir}/src/main/java/controllers/${packageDir}/${filep}")
+#parse("common/utils.parse")
+package  ${packageName};
+
+import org.springframework.web.bind.annotation.*;
+
+/**
+ * 
+ * Entity: ${application.name}
+ * 
+ * 
+ */
+ 
+@RestController
+public class ApiController {
+	@RequestMapping("/")
+    public String index() {
+    	String html = "Serving: ";
+        #foreach($entity in $application.entities)
+        html+= "\n${entity.name}'s endpoints";
+        html+= "\n/api/${entity.getVariableName()}  GET";
+        html+= "\n/api/${entity.getVariableName()} POST ";
+        html+= "\n/api/${entity.getVariableName()}/{id} PUT";
+        html+= "\n/api/${entity.getVariableName()}/{id} DELETE";
+        html+= "\n/api/${entity.getVariableName()}/{id} GET";
+        #end
+        return html;
+    }    
+}
+
+
+
+
+
+ 

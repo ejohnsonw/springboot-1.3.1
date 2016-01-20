@@ -1,0 +1,47 @@
+#set ($language="Java")
+#set ($description="Per entity controller for REST calls")
+#set ($author="Evol Johnson")
+#set ($overwrite="true")
+#set ($enabled="true")
+#set ($filep="${entity.name}ApiController.java")
+#set ($filename="${outputDir}/src/main/java/controllers/${packageDir}/${filep}")
+#parse("common/utils.parse")
+package  ${packageName};
+import org.springframework.web.bind.annotation.*;
+
+/**
+ * 
+ * Entity: ${entity.name}
+ * 
+ * 
+ */
+ 
+@RestController
+public class ${entity.name}ApiController {
+
+	@RequestMapping(value = "/api/${entity.getVariableName()}" , method = RequestMethod.GET)
+    public String list() {
+        return "List ${entity.name}";
+    }
+    
+    @RequestMapping(value = "/api/${entity.getVariableName()}" , method = RequestMethod.POST)
+    @ResponseBody
+    public String create() {
+        return "Creating ${entity.name}";
+    }
+
+	@RequestMapping(value = "/api/${entity.getVariableName()}/{id}" , method = RequestMethod.PUT)
+	@ResponseBody
+    public String update(@PathVariable("id") long id) {
+        return "Updating ${entity.name}";
+    }
+    
+    @RequestMapping(value = "/api/${entity.getVariableName()}/{id}" , method = RequestMethod.DELETE)
+    @ResponseBody
+    public String delete(@PathVariable("id") long id) {
+        return "Deleting ${entity.name}";
+    }
+    
+   
+}
+ 
